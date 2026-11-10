@@ -1876,3 +1876,222 @@ html[data-motion='reduced'] *::after {
     font-size: 0.98rem;
   }
 }
+
+/* ---------- Phones: compact, and headings at their natural width ---------- */
+/* Condensed headings read as tall and squeezed on a narrow screen, so here only the
+   highlighted words keep playing with the width axis. */
+@media (max-width: 720px) {
+  .cover__title,
+  .folder__title,
+  .project__title,
+  .job__role,
+  .contact__title,
+  .tools__title,
+  .service h3,
+  .creds__item strong,
+  .bio__lead,
+  .card__value,
+  .plate strong,
+  .zones__time {
+    font-stretch: 98%;
+    letter-spacing: -0.02em;
+  }
+  .folder {
+    padding: 1.15rem 1rem 1.5rem;
+  }
+  .cover {
+    gap: 1.1rem;
+  }
+  .cover__who {
+    font-size: 0.95rem;
+  }
+  .cover__title {
+    margin-top: 0.55rem;
+    font-size: min(9.6vw, 3.2rem);
+    line-height: 1.02;
+  }
+  .cover__copy {
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+  .cover__lead {
+    font-size: 1.02rem;
+    line-height: 1.4;
+  }
+  .cover__sub {
+    font-size: 0.93rem;
+  }
+  .cover__links {
+    margin-top: 0.8rem;
+  }
+
+  /* The four numbers become one row you swipe through. */
+  html.js .desk {
+    display: flex;
+    gap: 0.65rem;
+    margin-inline: -1rem;
+    padding: 0.5rem 1rem 0.9rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+  html.js .desk::-webkit-scrollbar {
+    display: none;
+  }
+  html.js .card {
+    flex: 0 0 64%;
+    scroll-snap-align: start;
+    padding: 0.8rem 0.9rem 0.9rem;
+  }
+  .card__value {
+    font-size: 2.4rem;
+  }
+
+  .folder__layout {
+    gap: 1rem;
+  }
+  .folder__title {
+    margin-top: 0.5rem;
+    font-size: 2.05rem;
+    line-height: 1.04;
+  }
+  .folder__title--long {
+    font-size: 1.85rem;
+  }
+  .folder__intro {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  /* File tabs sit in one row instead of a stack. */
+  html.js .files {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0.9rem -1rem 0;
+    padding: 0 1rem 0.2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  html.js .files::-webkit-scrollbar {
+    display: none;
+  }
+  html.js .files > li {
+    flex: 0 0 auto;
+  }
+  .file-tab {
+    padding: 0.5rem 0.8rem 0.55rem;
+  }
+  .file-tab__title {
+    font-size: 1rem;
+  }
+  .pending {
+    margin-top: 0.6rem;
+    padding: 0.55rem 0.75rem 0.6rem;
+  }
+  .pending h3 {
+    font-size: 1rem;
+  }
+
+  .paper {
+    padding: 1rem 0.95rem 1.1rem;
+  }
+  .project__head {
+    padding-block: 0.6rem 0.4rem;
+  }
+  .project__title {
+    font-size: 2.35rem;
+  }
+  .project__summary {
+    font-size: 1.05rem;
+  }
+  .project__impact strong {
+    font-size: 1.3rem;
+  }
+  .project__impact,
+  .project__story {
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+  }
+  .project__story {
+    font-size: 0.95rem;
+  }
+  .project__body {
+    gap: 0.9rem;
+  }
+  .demo,
+  .pipe {
+    padding: 0.85rem 0.9rem 0.9rem;
+  }
+  .job__body {
+    gap: 0.8rem;
+    padding-top: 0.7rem;
+  }
+  .job__role {
+    font-size: 1.65rem;
+  }
+  .job__company {
+    font-size: 1.2rem;
+  }
+  .job__points {
+    gap: 0.45rem;
+    font-size: 0.95rem;
+  }
+  .plate {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding: 0.85rem 0.8rem;
+  }
+  .plate strong {
+    font-size: 1.55rem;
+  }
+  .creds {
+    gap: 1rem;
+  }
+  .creds__item {
+    padding-bottom: 0.9rem;
+  }
+  .creds__item strong {
+    font-size: 1.2rem;
+  }
+  .services__list .service {
+    gap: 0.8rem;
+    padding-block: 0.75rem;
+  }
+  .service__icon {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .service h3 {
+    font-size: 1.4rem;
+  }
+  .bio {
+    gap: 1.1rem;
+  }
+  .bio__lead {
+    font-size: 1.25rem;
+  }
+  .bio__copy {
+    gap: 0.6rem;
+    font-size: 0.95rem;
+  }
+  .tools {
+    gap: 0.7rem;
+  }
+  .tools__title {
+    font-size: 1.55rem;
+  }
+  .tool-grid {
+    grid-template-columns: repeat(auto-fill, minmax(4.1rem, 1fr));
+    gap: 0.25rem;
+  }
+  .tool {
+    min-height: 2.9rem;
+  }
+  .contact__title {
+    font-size: min(9.4vw, 3rem);
+  }
+  .biz {
+    padding: 1.2rem 1.15rem 1.1rem;
+  }
+}

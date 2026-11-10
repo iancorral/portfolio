@@ -57,29 +57,56 @@ function initNav() {
   if (!top) return;
   const links = [...top.querySelectorAll<HTMLAnchorElement>('[data-spy]')];
 
+  // On phones the section links scroll sideways, so the current one is brought to the middle of the strip.
+  // This only moves the strip, never the page.
+  const strip = top.querySelector<HTMLElement>('.sv-nav');
+  const revealInStrip = (link: HTMLElement) => {
+    if (!strip || strip.scrollWidth <= strip.clientWidth || !strip.contains(link)) return;
+    const stripBox = strip.getBoundingClientRect();
+    const linkBox = link.getBoundingClientRect();
+    const left = strip.scrollLeft + (linkBox.left - stripBox.left) - (stripBox.width - linkBox.width) / 2;
+    strip.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+
   const hero = document.querySelector<HTMLElement>('.sv-hero');
   const onScroll = () => {
-    const pastHero = hero ? hero.getBoundingClientRect().bottom <= top.offsetHeight : scrollY > 8;
+    // "Past" allows for the folder tab of the next section, which overlaps the hero's last few pixels.
+    const pastHero = hero ? hero.getBoundingClientRect().bottom <= top.offsetHeight + 64 : scrollY > 8;
     top.classList.toggle('is-scrolled', pastHero);
   };
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
   onScroll();
 
-  // The section crossing the middle of the screen is the one you're reading.
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        links.forEach((link) => {
-          if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'true');
-          else link.removeAttribute('aria-current');
-        });
-      });
-    },
-    { rootMargin: '-45% 0px -50% 0px' },
-  );
-  document.querySelectorAll('main > section[id]').forEach((section) => observer.observe(section));
+  // The current section is the last one whose top has passed a line a little below the bar.
+  // Short sections still count when you jump to them, and the last one wins at the bottom of the page.
+  const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+  let current = '';
+  let queued = false;
+  const spy = () => {
+    queued = false;
+    const line = top.offsetHeight + innerHeight * 0.3;
+    const atBottom = scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+    let id = '';
+    for (const section of sections) if (section.getBoundingClientRect().top <= line) id = section.id;
+    if (atBottom) id = sections.at(-1)?.id ?? id;
+    if (id === current) return;
+    current = id;
+    links.forEach((link) => {
+      if (link.hash === `#${id}`) {
+        link.setAttribute('aria-current', 'true');
+        revealInStrip(link);
+      } else link.removeAttribute('aria-current');
+    });
+  };
+  const queueSpy = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(spy);
+  };
+  addEventListener('scroll', queueSpy, { passive: true });
+  addEventListener('resize', queueSpy);
+  spy();
 }
 
 // The floating contact button only appears when nothing else on screen offers the same thing.
