@@ -1,0 +1,118 @@
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light;
+  --brand: #084dc2;
+  --logo-ink: #1e2124;
+
+  --desk-base: #f1f0ec;
+  --desk-mix: 20%;
+  --sheet-base: #ffffff;
+  --sheet-mix: 0%;
+  --paper: #ffffff;
+  --ink: #1e2124;
+  --muted: #565a60;
+  --line: #1e21242e;
+
+  --tomato: #ee5636;
+  --panel: #1e2124;
+  --marigold: #f2ad22;
+  --jade: #0f9a78;
+  --grape: #5a35c8;
+
+  --tomato-text: #c43a1e;
+  --brand-text: #084dc2;
+  --marigold-text: #855c00;
+  --jade-text: #0a6f57;
+
+  --plate: #1e2124;
+  --plate-accent: #ffc94d;
+  --pop: #ffc94d;
+  --sheet-shadow: 0 1px 1px #1e212424, 0 1.4rem 2.8rem -1.4rem #1e212473;
+
+  --sans: 'Archivo Variable', Arial, Helvetica, sans-serif;
+
+  --gutter: clamp(10px, 3vw, 2.6rem);
+  --pad: clamp(16px, 3.4vw, 2.4rem);
+  --ear-h: 2.7rem;
+  --step: 0.36rem;
+  --strip: 0.7rem;
+  --rail-h: calc(var(--ear-h) + 5 * var(--step) + var(--strip) + 0.4rem);
+  --chamfer: 1.6rem;
+
+  /* One unit that respects both the width and the height of the window. */
+  --u: min(1vw, 1.6vh);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --logo-ink: #f2f2ef;
+  --desk-base: #14161a;
+  --desk-mix: 18%;
+  --sheet-base: #1e2126;
+  --sheet-mix: 0%;
+  --paper: #262a30;
+  --ink: #f2f2ef;
+  --muted: #b4b8bd;
+  --line: #f2f2ef2b;
+  --panel: #2b3037;
+  --tomato-text: #ff9c84;
+  --brand-text: #9dbcf5;
+  --marigold-text: #f5c25e;
+  --jade-text: #63d3b5;
+  --plate: #121417;
+  --sheet-shadow: 0 1px 1px #0000004d, 0 1.5rem 2.8rem -1.4rem #000000b3;
+}
+
+/* The desk picks up the color of the open folder, so the page reads as one piece. */
+:root {
+  --tint: var(--brand);
+  --desk: color-mix(in oklab, var(--tint) var(--desk-mix), var(--desk-base));
+}
+:root[data-folder='projects'] { --tint: var(--tomato); }
+:root[data-folder='services'] { --tint: var(--marigold); }
+:root[data-folder='about'] { --tint: var(--jade); }
+:root[data-folder='contact'] { --tint: var(--grape); }
+
+/* Each folder sets its own color, and everything inside reads from these. */
+.tone-home {
+  --f: var(--brand);
+  --on-f: #ffffff;
+  --on-f-soft: #e4ecfc;
+  --accent: var(--pop);
+  --sheet-accent: var(--brand-text);
+}
+.tone-projects {
+  --f: var(--tomato);
+  --on-f: #1e2124;
+  --on-f-soft: #1e2124;
+  --accent: #ffffff;
+  --sheet-accent: var(--tomato-text);
+}
+.tone-experience {
+  --f: var(--panel);
+  --on-f: #ffffff;
+  --on-f-soft: #ffffff;
+  --accent: var(--pop);
+  --sheet-accent: var(--brand-text);
+}
+.tone-services {
+  --f: var(--marigold);
+  --on-f: #1e2124;
+  --on-f-soft: #1e2124;
+  --accent: #1e2124;
+  --sheet-accent: var(--marigold-text);
+}
+.tone-about {
+  --f: var(--jade);
+  --on-f: #1e2124;
+  --on-f-soft: #1e2124;
+  --accent: #ffffff;
+  --sheet-accent: var(--jade-text);
+}
+.tone-contact {
+  --f: var(--grape);
+  --on-f: #ffffff;
+  --on-f-soft: #ffffff;
+  --accent: var(--pop);
+  --sheet-accent: var(--brand-text);
+}

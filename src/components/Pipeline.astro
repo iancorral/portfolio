@@ -1,0 +1,28 @@
+---
+import { pipeline } from '../data/site';
+---
+
+<figure class="pipe" data-pipe>
+  <figcaption class="pipe__head">
+    <span class="fine label">How a change reaches production</span>
+    <button class="pipe__run fine" type="button" data-pipe-run>Run it again</button>
+  </figcaption>
+
+  <div class="pipe__track">
+    <span class="pipe__line" aria-hidden="true"><span class="pipe__fill" data-pipe-fill></span></span>
+    <ol class="pipe__steps">
+      {
+        pipeline.map((step, i) => (
+          <li>
+            <button class="pipe__node is-done" type="button" data-pipe-step data-note={step.note} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span class="pipe__light" aria-hidden="true" />
+              <span class="pipe__name">{step.label}</span>
+            </button>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <p class="pipe__note" data-pipe-note aria-live="polite">{pipeline[0]!.note}</p>
+</figure>

@@ -1,0 +1,272 @@
+---
+import { Image } from 'astro:assets';
+import '@fontsource-variable/archivo/wdth.css';
+import '../styles/servicios.css';
+import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import BrandMark from '../components/BrandMark.astro';
+import LineIcon from '../components/LineIcon.astro';
+import LogoFull from '../components/LogoFull.astro';
+import LogoMark from '../components/LogoMark.astro';
+import { contacto, hero, necesidades, pasos, preguntas, queHago, servicios, trabajos } from '../data/servicios';
+import { whatsappIcon } from '../lib/icons';
+
+const title = 'Páginas y sistemas a la medida | IC Software';
+const description = 'Páginas web, tiendas en línea y sistemas internos hechos alrededor de cómo trabaja tu negocio. Desde Chihuahua, México.';
+const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
+const canonical = Astro.site ? new URL('/servicios', Astro.site).href : undefined;
+const mensajeInicial = 'Hola Ian, vi tu página de servicios y me gustaría platicar de un proyecto.';
+const whatsappInicial = contacto.whatsapp ? `https://wa.me/${contacto.whatsapp}?text=${encodeURIComponent(mensajeInicial)}` : '';
+const correoInicial = `mailto:${contacto.correo}?subject=${encodeURIComponent('Proyecto para mi negocio')}&body=${encodeURIComponent(mensajeInicial)}`;
+const contactoPrincipal = whatsappInicial || correoInicial;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_MX" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      document.documentElement.classList.add('sv-js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#cotizar">Ir a cotizar</a>
+
+    <header class="sv-top" data-top>
+      <a class="sv-brand" href="#inicio" aria-label="IC Software, ir al inicio">
+        <LogoFull class="sv-brand__full" />
+        <LogoMark class="sv-brand__logo" />
+      </a>
+      <nav class="sv-nav" aria-label="Secciones">
+        <ul>
+          <li><a href="#que-hago" data-spy>Qué hago</a></li>
+          <li><a href="#trabajos" data-spy>Trabajos</a></li>
+          <li><a href="#como" data-spy>Cómo trabajo</a></li>
+          <li><a href="#preguntas" data-spy>Preguntas</a></li>
+          <li><a href="/">Portafolio</a></li>
+        </ul>
+      </nav>
+      <a class="sv-top__cta" href="#cotizar" data-spy>Cotizar</a>
+    </header>
+
+    <main>
+      <section class="sv-hero sv-blue" id="inicio" aria-labelledby="sv-titulo">
+        <LogoMark class="sv-hero__mark" />
+        <div class="sv-hero__copy" data-reveal>
+          <p class="sv-hero__tag">{hero.etiqueta}</p>
+          <h1 id="sv-titulo">Páginas y sistemas <em>que le quedan a tu negocio.</em></h1>
+          <p class="sv-lead">{hero.lead}</p>
+          <div class="sv-actions">
+            {
+              whatsappInicial ? (
+                <a class="sv-btn sv-btn--wa" href={whatsappInicial} target="_blank" rel="noopener noreferrer">
+                  <BrandMark icon={whatsappIcon} class="sv-btn__icon" /> Escríbeme por WhatsApp
+                </a>
+              ) : (
+                <a class="sv-btn" href="#cotizar">Cuéntame de tu proyecto <span aria-hidden="true">→</span></a>
+              )
+            }
+            <a class="sv-link" href="#cotizar">O arma tu mensaje aquí</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sv-folder sv-white" style="--i:0" id="que-hago" aria-labelledby="sv-que">
+        <p class="sv-tab" aria-hidden="true">Qué hago</p>
+        <div class="sv-body">
+          <div class="sv-que__head" data-reveal>
+            <h2 id="sv-que">Lo que tu negocio necesita, <em>sin plantillas.</em></h2>
+            <p class="sv-que__intro">{queHago.intro}</p>
+          </div>
+          <ul class="sv-cards">
+            {
+              servicios.map((item, i) => (
+                <li class:list={['sv-card', { 'sv-card--feature': item.flujo }]} style={`--k:${i}`} data-reveal>
+                  <div class="sv-card__top">
+                    <LineIcon name={item.icono} class="sv-card__icon" />
+                    <h3>{item.titulo}</h3>
+                  </div>
+                  <p class="sv-card__line">{item.frase}</p>
+                  {
+                    item.flujo && (
+                      <ol class="sv-flow" aria-label="Ejemplo de una automatización">
+                        {item.flujo.map((paso) => (
+                          <li>{paso}</li>
+                        ))}
+                      </ol>
+                    )
+                  }
+                  <ul class="sv-tags" aria-label="Ejemplos">
+                    {item.ejemplos.map((ejemplo) => (
+                      <li>{ejemplo}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="sv-que__close" data-reveal>{queHago.cierre}</p>
+        </div>
+      </section>
+
+      <section class="sv-folder sv-ink" style="--i:1" id="trabajos" aria-labelledby="sv-trabajos">
+        <p class="sv-tab" aria-hidden="true">Trabajos</p>
+        <div class="sv-body">
+          <h2 id="sv-trabajos" data-reveal>Negocios reales, <em>funcionando.</em></h2>
+          <figure class="sv-shot" data-reveal>
+            <div class="sv-window">
+              <div class="sv-window__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <Image src={hero.imagen} widths={[640, 1120]} sizes="(max-width: 900px) 92vw, 900px" alt={hero.imagenAlt} />
+            </div>
+            <div class="sv-phone">
+              <Image src={hero.celular} widths={[180, 340]} sizes="170px" alt={hero.celularAlt} />
+            </div>
+          </figure>
+          <ul class="sv-work">
+            {
+              trabajos.map((item) => (
+                <li data-reveal>
+                  <p class="sv-kicker">{item.tipo}</p>
+                  <h3>{item.titulo}</h3>
+                  <p>{item.texto}</p>
+                  <ul class="sv-ticks">
+                    {item.puntos.map((punto) => <li>{punto}</li>)}
+                  </ul>
+                  {item.enlace && <a class="sv-link" href={item.enlace.href} target="_blank" rel="noopener noreferrer">{item.enlace.texto}</a>}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section class="sv-folder sv-blue" style="--i:2" id="como" aria-labelledby="sv-como">
+        <p class="sv-tab" aria-hidden="true">Cómo trabajo</p>
+        <div class="sv-body">
+          <h2 id="sv-como" data-reveal>Sabes qué sigue <em>en cada paso.</em></h2>
+          <ol class="sv-steps">
+            {
+              pasos.map((paso) => (
+                <li data-reveal>
+                  <h3>{paso.titulo}</h3>
+                  <p>{paso.texto}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
+
+      <section class="sv-folder sv-white" style="--i:3" id="preguntas" aria-labelledby="sv-preguntas">
+        <p class="sv-tab" aria-hidden="true">Preguntas</p>
+        <div class="sv-body sv-split">
+          <h2 id="sv-preguntas" data-reveal>Antes de <em>escribirme.</em></h2>
+          <div class="sv-faq">
+            {
+              preguntas.map((item) => (
+                <details data-reveal>
+                  <summary>{item.pregunta}</summary>
+                  <p>{item.respuesta}</p>
+                </details>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="sv-folder sv-ink" style="--i:4" id="cotizar" aria-labelledby="sv-cotizar">
+        <p class="sv-tab" aria-hidden="true">Cotizar</p>
+        <div class="sv-body sv-split">
+          <div data-reveal>
+            <h2 id="sv-cotizar">Cuéntame cómo debería funcionar. <em>Lo armamos juntos.</em></h2>
+            <p class="sv-lead">Marca lo que necesitas y te armo el mensaje. Tú lo revisas y lo mandas.</p>
+          </div>
+
+          <form class="sv-quote" data-quote data-correo={contacto.correo} data-whatsapp={contacto.whatsapp}>
+            <fieldset>
+              <legend>¿Qué necesitas?</legend>
+              <div class="sv-chips">
+                {
+                  necesidades.map((item) => (
+                    <label class="sv-chip">
+                      <input type="checkbox" name="necesidad" value={item} />
+                      <span>{item}</span>
+                    </label>
+                  ))
+                }
+              </div>
+            </fieldset>
+            <label class="sv-field">
+              <span>¿De qué es tu negocio?</span>
+              <input type="text" name="negocio" autocomplete="organization" placeholder="Ej. Llantera en Chihuahua" />
+            </label>
+            <label class="sv-field">
+              <span>¿Algo que quieras contarme? <small>(opcional)</small></span>
+              <textarea name="detalles" rows="3"></textarea>
+            </label>
+
+            <div class="sv-preview" aria-live="polite">
+              <p class="sv-preview__label">Tu mensaje</p>
+              <p data-quote-preview>{mensajeInicial}</p>
+            </div>
+
+            <div class="sv-actions">
+              {
+                contacto.whatsapp && (
+                  <a class="sv-btn sv-btn--wa" href={whatsappInicial} target="_blank" rel="noopener noreferrer" data-quote-whatsapp>
+                    <BrandMark icon={whatsappIcon} class="sv-btn__icon" /> Enviar por WhatsApp
+                  </a>
+                )
+              }
+              <a class:list={['sv-btn', { 'sv-btn--quiet': contacto.whatsapp }]} href={correoInicial} data-quote-correo>Enviar por correo <span aria-hidden="true">→</span></a>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="sv-foot">
+      <img src="/logo-full.svg" alt="IC Software" width="1480" height="364" loading="lazy" />
+      <div>
+        <p>Chihuahua, México · © {new Date().getFullYear()} Ian Corral</p>
+        <a href="/">Ver portafolio</a>
+      </div>
+    </footer>
+
+    <aside aria-label="Contacto rápido">
+      <a
+        class:list={['sv-dock', { 'sv-dock--wa': contacto.whatsapp }]}
+        href={contactoPrincipal}
+        target={contacto.whatsapp ? '_blank' : undefined}
+        rel={contacto.whatsapp ? 'noopener noreferrer' : undefined}
+        data-dock
+      >
+        {
+          contacto.whatsapp ? (
+            <>
+              <span class="sv-dock__icon" aria-hidden="true"><BrandMark icon={whatsappIcon} /></span>
+              Escríbeme por WhatsApp
+            </>
+          ) : (
+            <>Escríbeme <span aria-hidden="true">→</span></>
+          )
+        }
+      </a>
+    </aside>
+
+    <script>
+      import '../scripts/servicios';
+    </script>
+  </body>
+</html>

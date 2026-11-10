@@ -1,0 +1,27 @@
+---
+// Simple line drawings for services, drawn on one 32px grid so they read as a set.
+const shapes = {
+  browser: ['M4 7h24v18H4z', 'M4 12h24', 'M8 9.5h.01', 'M11.5 9.5h.01', 'M9 17h9', 'M9 21h14'],
+  store: ['M5 12 7 5h18l2 7', 'M5 12a3.7 3.7 0 0 0 7.3 0 3.7 3.7 0 0 0 7.4 0 3.7 3.7 0 0 0 7.3 0', 'M7 16v11h18V16', 'M13 27v-7h6v7'],
+  panel: ['M4 6h24v20H4z', 'M12 6v20', 'M16 12h8', 'M16 17h8', 'M16 22h5', 'M7 11h2', 'M7 16h2'],
+  loop: ['M26 12a11 11 0 0 0-19.5-2', 'M6 5v5h5', 'M6 20a11 11 0 0 0 19.5 2', 'M26 27v-5h-5'],
+  talk: ['M5 6h22v15H14l-6 5v-5H5z', 'M10 12h12', 'M10 16h8'],
+  plan: ['M8 4h12l5 5v19H8z', 'M20 4v5h5', 'M12 15h9', 'M12 19h9', 'M12 23h5'],
+  build: ['M12 10 6 16l6 6', 'M20 10l6 6-6 6', 'M18 7l-4 18'],
+  launch: ['M16 27V9', 'M9 15l7-8 7 8', 'M6 27h20'],
+  bolt: ['M18 3 7 18h8l-2 11 12-16h-8z'],
+  chart: ['M5 5v22h22', 'M10 21v-5', 'M15 21v-9', 'M20 21v-7', 'M25 21V9'],
+  shield: ['M16 4 6 8v7c0 6.5 4.2 11 10 13 5.8-2 10-6.5 10-13V8z', 'M11.5 16l3.2 3.2 6-6.4'],
+};
+
+interface Props {
+  name: keyof typeof shapes;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {shapes[name].map((d) => <path d={d} />)}
+</svg>

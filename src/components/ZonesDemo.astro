@@ -1,0 +1,41 @@
+---
+import { localTime, weeks, zones } from '../lib/zones';
+
+const startHour = 9;
+---
+
+<figure class="demo" data-zones>
+  <figcaption class="demo__head">
+    <span class="fine label">Try the timezone-safe schedule</span>
+    <span class="fine demo__flag">Example data</span>
+  </figcaption>
+
+  <div class="zones__controls">
+    <label class="zones__range">
+      <span class="fine">Class in Chihuahua <output data-zones-hour>{startHour}:00</output></span>
+      <input type="range" min="7" max="20" step="1" value={startHour} data-zones-input />
+    </label>
+    <div class="demo__chips" role="group" aria-label="Week">
+      {
+        weeks.map((week, i) => (
+          <button class="demo__chip" type="button" data-zones-week={week.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {week.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <ul class="zones">
+    {
+      zones.map((zone) => (
+        <li class="zones__row">
+          <span class="zones__city">{zone.city}<span class="fine">{zone.role}</span></span>
+          <strong class="zones__time" data-zones-time={zone.tz}>{localTime(startHour, weeks[0]!.id, zone.tz)}</strong>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="demo__readout" data-zones-readout>Switch the week. Clocks change in Madrid and New York, but not in Chihuahua.</p>
+</figure>

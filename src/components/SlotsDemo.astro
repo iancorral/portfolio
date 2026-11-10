@@ -1,0 +1,41 @@
+---
+import { clock, isBooked, sampleServices, slotStarts, validStarts } from '../lib/slots';
+
+const initial = sampleServices[0]!;
+const valid = validStarts(initial.minutes);
+---
+
+<figure class="demo" data-slots>
+  <figcaption class="demo__head">
+    <span class="fine label">Try the availability engine</span>
+    <span class="fine demo__flag">Example data</span>
+  </figcaption>
+
+  <div class="demo__chips" role="group" aria-label="Services to book">
+    {
+      sampleServices.map((service, i) => (
+        <button class="demo__chip" type="button" data-service={service.minutes} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {service.label} <span class="fine">{service.minutes}m</span>
+        </button>
+      ))
+    }
+  </div>
+
+  <ol class="slots" aria-hidden="true">
+    {
+      slotStarts.map((start) => (
+        <li class:list={['slot', { 'is-booked': isBooked(start), 'is-valid': valid.includes(start) }]} data-start={start} />
+      ))
+    }
+  </ol>
+  <div class="slots__axis fine" aria-hidden="true">
+    <span>9:00</span><span>12:00</span><span>15:00</span><span>18:00</span>
+  </div>
+
+  <p class="demo__readout" data-slots-readout aria-live="polite">
+    {valid.length} valid start times: {valid.map(clock).join(', ')}.
+  </p>
+  <p class="demo__legend fine" aria-hidden="true">
+    <i class="key key--valid"></i>Can start <i class="key key--booked"></i>Booked
+  </p>
+</figure>

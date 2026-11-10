@@ -1,0 +1,34 @@
+---
+import { person } from '../data/site';
+import { githubIcon, linkedinIcon } from '../lib/icons';
+import BrandMark from './BrandMark.astro';
+---
+
+<section id="contact" class="folder tone-contact" aria-labelledby="contact-title" data-folder-panel="contact">
+  <div class="contact" data-content>
+    <header class="contact__head">
+      <p class="eyebrow">Have something in mind?</p>
+      <h2 id="contact-title" class="contact__title" tabindex="-1" data-split>
+        Tell me how it should work.<br /><em>We’ll shape it together.</em>
+      </h2>
+    </header>
+
+    <div class="biz">
+      <img class="biz__logo" src="/logo-full.svg" alt="IC Software" width="1480" height="364" />
+      <p class="biz__name"><strong>{person.name}</strong> {person.role}</p>
+      <div class="contact__email">
+        {/* Allows a line break before the @ on narrow phones, never in the middle of a word. */}
+        <a class="contact__address" href={`mailto:${person.email}`}>{person.email.split('@')[0]}<wbr />@{person.email.split('@')[1]}</a>
+        <button class="contact__copy" type="button" data-copy={person.email}>
+          <span data-copy-label>Copy</span>
+        </button>
+      </div>
+      <ul class="contact__links">
+        <li><a class="arrow-link" href={person.github} target="_blank" rel="noopener noreferrer"><BrandMark icon={githubIcon} class="link-icon" /> GitHub</a></li>
+        <li><a class="arrow-link" href={person.linkedin} target="_blank" rel="noopener noreferrer"><BrandMark icon={linkedinIcon} class="link-icon" /> LinkedIn</a></li>
+        <li><a class="arrow-link" href={person.resume} download>Résumé <span aria-hidden="true">↓</span></a></li>
+      </ul>
+      <p class="biz__foot"><span data-clock>Chihuahua, Mexico</span> · © {new Date().getFullYear()}</p>
+    </div>
+  </div>
+</section>

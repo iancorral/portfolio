@@ -1,0 +1,50 @@
+---
+import { about, person, toolkit } from '../data/site';
+import { iconFor } from '../lib/icons';
+import BrandMark from './BrandMark.astro';
+
+// Tools with no public logo get their initials in the same tile, so the grid stays even.
+const initials = (name: string) => name.split(/[\s/]/)[0]!.slice(0, 3).toUpperCase();
+---
+
+<section id="about" class="folder tone-about" aria-labelledby="about-title" data-folder-panel="about">
+  <div class="folder__layout" data-content>
+    <header class="folder__side">
+      <p class="eyebrow">A little more about me</p>
+      <h2 id="about-title" class="folder__title folder__title--long" tabindex="-1" data-split>
+        I like understanding the problem <em>before opening the editor.</em>
+      </h2>
+    </header>
+
+    <div class="papers">
+      <div class="paper bio is-current" data-paper="about">
+        <div class="bio__copy">
+          <p class="bio__lead">{about.lead}</p>
+          {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <a class="arrow-link" href={person.resume} download>Download résumé <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="tools">
+          <h3 class="tools__title">The tools I reach for <em>right now.</em></h3>
+          {
+            toolkit.map((group) => (
+              <div class="tools__group">
+                <h4 class="fine label">{group.group}</h4>
+                <ul class="tool-grid">
+                  {group.items.map((item) => {
+                    const icon = iconFor(item);
+                    return (
+                      <li class="tool">
+                        {icon ? <BrandMark icon={icon} class="tool__icon" /> : <span class="tool__initials fine" aria-hidden="true">{initials(item)}</span>}
+                        <span class="tool__name">{item}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

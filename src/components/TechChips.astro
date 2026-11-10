@@ -1,0 +1,25 @@
+---
+import { iconFor } from '../lib/icons';
+import BrandMark from './BrandMark.astro';
+
+interface Props {
+  items: string[];
+  label?: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<ul class="chips" aria-label={label}>
+  {
+    items.map((item) => {
+      const icon = iconFor(item);
+      return (
+        <li class="chip">
+          {icon && <BrandMark icon={icon} class="chip__icon" />}
+          {item}
+        </li>
+      );
+    })
+  }
+</ul>

@@ -1,0 +1,32 @@
+---
+import { folders } from '../data/site';
+---
+
+<nav class="rail" aria-label="Folders" data-rail style={`--n:${folders.length}`}>
+  {
+    folders.map((folder, i) => (
+      <div class={`layer tone-${folder.id}`} data-layer={folder.id} style={`--i:${i};--d:${i};z-index:${10 - i}`}>
+        <a class="ear" href={`#${folder.id}`} data-ear={folder.id}>
+          <span class="ear__shape" aria-hidden="true" />
+          <span class="ear__label">{folder.label}</span>
+        </a>
+        <span class="layer__strip" aria-hidden="true" />
+      </div>
+    ))
+  }
+</nav>
+
+{/* Sets the stack order before first paint when the page opens on a deep link. */}
+<script is:inline>
+  (function () {
+    var active = document.documentElement.dataset.folder;
+    var depth = 1;
+    document.querySelectorAll('[data-layer]').forEach(function (layer) {
+      var isActive = layer.dataset.layer === active;
+      var d = isActive ? 0 : depth++;
+      layer.style.setProperty('--d', d);
+      layer.style.zIndex = 10 - d;
+      if (isActive) layer.querySelector('[data-ear]').setAttribute('aria-current', 'true');
+    });
+  })();
+</script>

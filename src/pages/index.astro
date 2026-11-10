@@ -1,0 +1,31 @@
+---
+import AboutFolder from '../components/AboutFolder.astro';
+import ContactFolder from '../components/ContactFolder.astro';
+import ExperienceFolder from '../components/ExperienceFolder.astro';
+import HomeFolder from '../components/HomeFolder.astro';
+import ProjectsFolder from '../components/ProjectsFolder.astro';
+import Rail from '../components/Rail.astro';
+import ServicesFolder from '../components/ServicesFolder.astro';
+import TopBar from '../components/TopBar.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base>
+  <a class="skip-link" href="#home">Skip to content</a>
+  <TopBar />
+  <main class="cabinet" data-cabinet>
+    <Rail />
+    <div class="stack" data-stack>
+      <HomeFolder />
+      <ProjectsFolder />
+      <ExperienceFolder />
+      <ServicesFolder />
+      <AboutFolder />
+      <ContactFolder />
+    </div>
+  </main>
+</Base>
+
+<script>
+  import '../scripts/main';
+</script>

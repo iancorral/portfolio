@@ -1,0 +1,42 @@
+---
+import { hero, person, stats } from '../data/site';
+import { githubIcon, linkedinIcon } from '../lib/icons';
+import BrandMark from './BrandMark.astro';
+import LogoMark from './LogoMark.astro';
+---
+
+<section id="home" class="folder tone-home" aria-labelledby="home-title" data-folder-panel="home">
+  <div class="cover" data-content>
+    <div class="cover__intro">
+      <p class="cover__who"><strong>{person.name}</strong> {person.role}</p>
+      <h2 id="home-title" class="cover__title" tabindex="-1" data-split data-fit-title>
+        Hi, I’m Ian.<br />I turn ideas into<br /><em>software that fits.</em>
+      </h2>
+      <div class="cover__copy">
+        <p class="cover__lead">{hero.lead}</p>
+        <p class="cover__sub">{hero.sub}</p>
+      </div>
+      <div class="cover__links">
+        <a class="arrow-link" href={person.github} target="_blank" rel="noopener noreferrer"><BrandMark icon={githubIcon} class="link-icon" /> GitHub</a>
+        <a class="arrow-link" href={person.linkedin} target="_blank" rel="noopener noreferrer"><BrandMark icon={linkedinIcon} class="link-icon" /> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="desk-wrap">
+      <LogoMark class="desk__mark" />
+      <dl class="desk" data-desk>
+        {
+          stats.map((stat) => (
+            <div class={`card tone-${stat.tone}`} data-card>
+              <dt class="card__label">{stat.label}</dt>
+              <dd class="card__value">
+                {stat.prefix}<span data-count={stat.value}>{stat.value}</span>{stat.suffix}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="desk__hint" aria-hidden="true">Go ahead, move them around</p>
+    </div>
+  </div>
+</section>

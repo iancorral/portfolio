@@ -1,0 +1,82 @@
+---
+import { inProgress, projects } from '../data/site';
+import SitePreview from './SitePreview.astro';
+import SlotsDemo from './SlotsDemo.astro';
+import TechChips from './TechChips.astro';
+import ZonesDemo from './ZonesDemo.astro';
+---
+
+<section id="projects" class="folder tone-projects" aria-labelledby="projects-title" data-folder-panel="projects">
+  <div class="folder__layout" data-content data-files>
+    <header class="folder__side">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="projects-title" class="folder__title" tabindex="-1" data-split>
+        Projects built around <em>real workflows.</em>
+      </h2>
+      <p class="folder__intro">Each one starts with the same question: how does this need to work in real life?</p>
+
+      <ul class="files">
+        {
+          projects.map((project, i) => (
+            <li>
+              <button class="file-tab" type="button" data-file-tab={project.id} aria-current={i === 0 ? 'true' : undefined}>
+                <span class="file-tab__title">{project.title}</span>
+                <span class="file-tab__meta fine">{project.status}</span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+
+      <aside class="pending">
+        <h3>{inProgress.title}</h3>
+        <p>{inProgress.text}</p>
+      </aside>
+    </header>
+
+    <div class="papers">
+      {
+        projects.map((project, i) => (
+          <article class:list={['paper project', { 'is-current': i === 0 }]} data-paper={project.id} aria-labelledby={`${project.id}-title`}>
+            <div class="sheet__meta fine">
+              <span>{project.file} / {project.title}</span>
+              <span>{project.status} · {project.year}</span>
+            </div>
+
+            <div class="project__head">
+              <h3 id={`${project.id}-title`} class="project__title">{project.title}</h3>
+              <span class="stamp fine" data-stamp>{project.stamp}</span>
+            </div>
+
+            <div class="project__body">
+              <div class="project__text">
+                <p class="project__summary">{project.summary}</p>
+                <div class="project__impact">
+                  <span class="fine label">{project.impactLabel}</span>
+                  <strong>{project.impact}</strong>
+                </div>
+                <p class="project__story">{project.story}</p>
+              </div>
+              {project.demo === 'slots' && <SlotsDemo />}
+              {project.demo === 'zones' && <ZonesDemo />}
+              {project.preview && <SitePreview {...project.preview} />}
+            </div>
+
+            <div class="project__foot">
+              <TechChips items={project.stack} label="Tech stack" />
+              <div class="project__links">
+                {
+                  project.links.map((link) => (
+                    <a class="arrow-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

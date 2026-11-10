@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  url: string;
+}
+
+const { image, alt, url } = Astro.props;
+---
+
+<figure class="preview" data-preview>
+  <div class="preview__bar" aria-hidden="true">
+    <i></i><i></i><i></i>
+    <span class="fine">{url}</span>
+  </div>
+  <div class="preview__view" data-preview-view>
+    <Image src={image} widths={[560, 960]} sizes="(max-width: 900px) 92vw, 560px" alt={alt} loading="lazy" data-preview-image draggable="false" />
+  </div>
+  <figcaption class="preview__caption fine">The real site. Hover to scroll through it.</figcaption>
+</figure>

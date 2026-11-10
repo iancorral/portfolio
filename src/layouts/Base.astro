@@ -1,0 +1,67 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '../styles/global.css';
+import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import { folders, person } from '../data/site';
+
+const title = `${person.name} | ${person.role}`;
+const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const folderIds = folders.map((folder) => folder.id);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.fullName,
+  alternateName: person.name,
+  jobTitle: person.role,
+  email: `mailto:${person.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Chihuahua', addressCountry: 'MX' },
+  sameAs: [person.github, person.linkedin],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={person.description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={person.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {/* Runs before first paint so the right folder and theme show with no flash. */}
+    <script is:inline define:vars={{ folderIds }}>
+      (function () {
+        var root = document.documentElement;
+        var hash = location.hash.slice(1);
+        root.classList.add('js');
+        root.dataset.folder = folderIds.indexOf(hash) > -1 ? hash : 'home';
+        var theme = null;
+        var motion = null;
+        try {
+          theme = localStorage.getItem('theme');
+          motion = localStorage.getItem('motion');
+        } catch (e) {}
+        // Paper is the identity of the site, so dark is something a visitor chooses, not the default.
+        root.dataset.theme = theme || 'light';
+        if (motion) root.dataset.motion = motion;
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

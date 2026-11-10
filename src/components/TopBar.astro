@@ -1,0 +1,26 @@
+---
+import { person } from '../data/site';
+import LogoMark from './LogoMark.astro';
+---
+
+<header class="topbar">
+  <div class="topbar__id">
+    <h1 class="brand__heading">
+      <a class="brand" href="#home">
+        <LogoMark class="brand__logo" />
+        <span class="sr-only">{person.name}, {person.role}</span>
+      </a>
+    </h1>
+  </div>
+  <div class="hangers">
+    <a class="hanger hanger--ink" href={person.resume} download>Résumé <span aria-hidden="true">↓</span></a>
+    <button class="hanger" type="button" role="switch" aria-checked="true" data-motion-toggle>
+      <span class="hanger__long">Animations</span><span class="hanger__short">Motion</span>
+      <strong data-state>On</strong>
+    </button>
+    <button class="hanger" type="button" role="switch" aria-checked="false" data-theme-toggle>
+      <span class="hanger__long">Dark mode</span><span class="hanger__short">Dark</span>
+      <strong data-state>Off</strong>
+    </button>
+  </div>
+</header>

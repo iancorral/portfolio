@@ -1,0 +1,39 @@
+---
+import { person, services } from '../data/site';
+import LineIcon from './LineIcon.astro';
+---
+
+<section id="services" class="folder tone-services" aria-labelledby="services-title" data-folder-panel="services">
+  <div class="folder__layout" data-content>
+    <header class="folder__side">
+      <p class="eyebrow">My services</p>
+      <h2 id="services-title" class="folder__title" tabindex="-1" data-split>
+        Your idea, built to feel <em>completely yours.</em>
+      </h2>
+      <p class="folder__intro">{services.intro}</p>
+    </header>
+
+    <div class="papers">
+      <div class="paper services is-current" data-paper="services">
+        <ul class="services__list">
+          {
+            services.items.map((item) => (
+              <li class="service">
+                <LineIcon name={item.icon as 'browser' | 'panel' | 'loop'} class="service__icon" />
+                <div>
+                  <span class="fine label">{item.tag}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="services__actions">
+          <a class="services__cta" href={`mailto:${person.email}`}>{services.cta} <span aria-hidden="true">→</span></a>
+          <a class="arrow-link" href="/servicios">{services.page}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

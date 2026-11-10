@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg class:list={['logo-mark', className]} viewBox="0 0 320 335" aria-hidden="true">
+  <path class="logo-mark__c" d="M316.07 90.17A167.5 167.5 0 1 0 316.07 244.83L266.84 219.21A112 112 0 1 1 266.84 115.79Z"></path>
+  <rect class="logo-mark__bar" x="135" y="74" width="68" height="188"></rect>
+</svg>

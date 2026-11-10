@@ -1,0 +1,90 @@
+---
+import { certification, education, jobs, spoken } from '../data/site';
+import Pipeline from './Pipeline.astro';
+import TechChips from './TechChips.astro';
+---
+
+<section id="experience" class="folder tone-experience" aria-labelledby="experience-title" data-folder-panel="experience">
+  <div class="folder__layout" data-content data-files>
+    <header class="folder__side">
+      <p class="eyebrow">Experience</p>
+      <h2 id="experience-title" class="folder__title" tabindex="-1" data-split>
+        The work behind <em>the deploy button.</em>
+      </h2>
+
+      <ul class="files">
+        {
+          jobs.map((job, i) => (
+            <li>
+              <button class="file-tab" type="button" data-file-tab={job.id} aria-current={i === 0 ? 'true' : undefined}>
+                <span class="file-tab__title">{job.tab}</span>
+                <span class="file-tab__meta fine">{job.period}</span>
+              </button>
+            </li>
+          ))
+        }
+        <li>
+          <button class="file-tab" type="button" data-file-tab="education">
+            <span class="file-tab__title">Education</span>
+            <span class="file-tab__meta fine">& certification</span>
+          </button>
+        </li>
+      </ul>
+    </header>
+
+    <div class="papers">
+      {
+        jobs.map((job, i) => (
+          <article class:list={['paper job', { 'is-current': i === 0 }]} data-paper={job.id}>
+            <div class="sheet__meta fine">
+              <span>{job.period}</span>
+              <span>{job.location}</span>
+            </div>
+            <div class="job__body">
+              <div class="job__head">
+                <h3 class="job__role">{job.role} {job.roleNote && <span class="nowrap">{job.roleNote}</span>}</h3>
+                <p class="job__company">{job.company}</p>
+                <p class="job__context">{job.context}</p>
+                <TechChips items={job.tech} label="Main technologies" />
+              </div>
+              <ul class="ticks job__points">
+                {job.points.map((point) => <li>{point}</li>)}
+              </ul>
+            </div>
+            {i === 0 && <Pipeline />}
+            {
+              job.highlights && (
+                <ul class="plate">
+                  {job.highlights.map((item) => (
+                    <li>
+                      <strong>{item.value}</strong>
+                      <span>{item.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </article>
+        ))
+      }
+
+      <div class="paper creds" data-paper="education">
+        <div class="creds__item">
+          <span class="fine label">Education</span>
+          <strong>{education.school}</strong>
+          <p>{education.degree}</p>
+          <p class="fine creds__date">{education.period}</p>
+        </div>
+        <div class="creds__item">
+          <span class="fine label">Certification</span>
+          <strong>{certification.name}</strong>
+          <p class="fine creds__date">{certification.date}</p>
+        </div>
+        <div class="creds__item">
+          <span class="fine label">Languages</span>
+          <strong>{spoken}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
