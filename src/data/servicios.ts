@@ -9,7 +9,7 @@ export const contacto = {
 
 export const hero = {
   etiqueta: 'Páginas web y sistemas a la medida · Chihuahua',
-  lead: 'Diseño y construyo páginas, tiendas en línea y sistemas internos alrededor de cómo trabaja tu negocio de verdad, no con una plantilla.',
+  lead: 'Páginas, sistemas, automatizaciones y lo que los mantiene en línea, hechos alrededor de cómo trabaja tu negocio de verdad, no con una plantilla.',
   imagen: tallerHero,
   imagenAlt: 'Página de Auto Alineaciones Luevano en una computadora.',
   celular: tallerPhone,
@@ -17,56 +17,71 @@ export const hero = {
 };
 
 export const queHago = {
-  intro: 'Si tu negocio lo hace a mano todos los días, casi seguro se puede automatizar.',
-  cierre: '¿Tienes otra idea? Si se puede hacer con una computadora y te ahorra tiempo, platiquemos.',
+  intro: 'Desde una página sencilla hasta el sistema que mueve tu operación. Toma lo que te sirva o arma tu combinación.',
+  cierre: '¿No ves lo que buscas? Si se resuelve con software, platiquemos.',
 };
 
 type Servicio = {
-  icono: 'browser' | 'store' | 'panel' | 'bolt' | 'chart' | 'shield';
+  icono: 'browser' | 'store' | 'panel' | 'bolt' | 'plug' | 'chart' | 'cloud' | 'shield' | 'compass';
   titulo: string;
   frase: string;
   ejemplos: string[];
-  // Un ejemplo de cómo se ve una automatización, paso por paso.
-  flujo?: string[];
 };
 
 export const servicios: Servicio[] = [
   {
-    icono: 'bolt',
-    titulo: 'Automatizaciones',
-    frase: 'Lo que haces a mano todos los días, que se haga solo.',
-    ejemplos: ['Recordatorios por WhatsApp', 'Respuestas automáticas', 'Formularios que llenan tu sistema', 'Reportes que llegan solos', 'Conectar tus apps'],
-    flujo: ['Tu cliente agenda', 'Le llega su confirmación', 'Se anota en tu calendario', 'Un día antes, su recordatorio'],
-  },
-  {
     icono: 'browser',
     titulo: 'Páginas web',
-    frase: 'Para que te encuentren en Google y te escriban por WhatsApp.',
-    ejemplos: ['Página de negocio', 'Landing de promoción', 'Menú o catálogo', 'Aparecer en Google'],
+    frase: 'Para que te encuentren en Google y te escriban directo.',
+    ejemplos: ['Página de negocio', 'Landing de promoción', 'Aparecer en Google'],
   },
   {
     icono: 'panel',
     titulo: 'Sistemas a la medida',
-    frase: 'El sistema que tu negocio necesita, no el que trae una plantilla.',
-    ejemplos: ['Citas y reservas', 'Clientes', 'Inventario', 'Panel de administración', 'Portal para tus clientes'],
+    frase: 'Lo que hoy vive en libretas y hojas sueltas, en un solo lugar.',
+    ejemplos: ['Inventario', 'Clientes y pedidos', 'Portal para tus clientes'],
+  },
+  {
+    icono: 'bolt',
+    titulo: 'Automatizaciones',
+    frase: 'Las tareas repetitivas, que se hagan solas.',
+    ejemplos: ['Mensajes y recordatorios', 'Formularios que llenan tu sistema', 'Reportes que llegan solos'],
   },
   {
     icono: 'store',
-    titulo: 'Tiendas y catálogos',
-    frase: 'Tus productos con fotos y precios, listos para vender o cotizar.',
-    ejemplos: ['Catálogo con WhatsApp', 'Pagos en línea', 'Cotizador', 'Existencias al día'],
+    titulo: 'Tiendas en línea',
+    frase: 'Vende o cotiza tus productos sin depender de un marketplace.',
+    ejemplos: ['Catálogo con WhatsApp', 'Pagos con tarjeta', 'Existencias al día'],
+  },
+  {
+    icono: 'plug',
+    titulo: 'Integraciones',
+    frase: 'Que tus herramientas se hablen y dejes de copiar y pegar.',
+    ejemplos: ['Pagos en línea', 'Google Sheets y Drive', 'APIs de otros servicios'],
   },
   {
     icono: 'chart',
     titulo: 'Datos y reportes',
     frase: 'Los números de tu negocio en una pantalla, sin pelearte con Excel.',
-    ejemplos: ['Tablero de ventas', 'De Excel a un sistema', 'Reportes para tomar decisiones'],
+    ejemplos: ['Tablero de ventas', 'De Excel a una base de datos', 'Indicadores semanales'],
+  },
+  {
+    icono: 'cloud',
+    titulo: 'Servidores y nube',
+    frase: 'Tu página o sistema en línea, rápido, respaldado y sin sustos.',
+    ejemplos: ['Hosting, dominio y correo', 'Migración a la nube', 'Respaldos y monitoreo'],
   },
   {
     icono: 'shield',
-    titulo: 'Hosting y mantenimiento',
-    frase: 'Tu página siempre arriba, segura y al día, sin que tengas que pensarlo.',
-    ejemplos: ['Dominio y correo', 'Respaldos', 'Actualizaciones', 'Seguridad'],
+    titulo: 'Mantenimiento y mejoras',
+    frase: '¿Ya tienes algo? Lo arreglo, lo hago más rápido y le agrego lo que falta.',
+    ejemplos: ['Arreglar lo que falla', 'Nuevas funciones', 'Actualizaciones de seguridad'],
+  },
+  {
+    icono: 'compass',
+    titulo: 'Asesoría técnica',
+    frase: 'Antes de pagar por un software, te ayudo a ver qué te conviene.',
+    ejemplos: ['Elegir herramientas', 'Revisar una cotización', 'Plan para digitalizarte'],
   },
 ];
 
@@ -123,4 +138,15 @@ export const preguntas = [
   },
 ];
 
-export const necesidades = ['Página para mi negocio', 'Tienda o catálogo', 'Sistema a la medida', 'Automatizar algo', 'Reportes o datos', 'Mejorar lo que ya tengo', 'Todavía no sé'];
+export const necesidades = [
+  'Página para mi negocio',
+  'Tienda en línea',
+  'Sistema a la medida',
+  'Automatizar algo',
+  'Conectar mis herramientas',
+  'Reportes o datos',
+  'Hosting o servidores',
+  'Mejorar lo que ya tengo',
+  'Asesoría',
+  'Todavía no sé',
+];

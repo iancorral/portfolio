@@ -92,21 +92,12 @@ const contactoPrincipal = whatsappInicial || correoInicial;
           <ul class="sv-cards">
             {
               servicios.map((item, i) => (
-                <li class:list={['sv-card', { 'sv-card--feature': item.flujo }]} style={`--k:${i}`} data-reveal>
+                <li class="sv-card" style={`--k:${i}`} data-reveal>
                   <div class="sv-card__top">
                     <LineIcon name={item.icono} class="sv-card__icon" />
                     <h3>{item.titulo}</h3>
                   </div>
                   <p class="sv-card__line">{item.frase}</p>
-                  {
-                    item.flujo && (
-                      <ol class="sv-flow" aria-label="Ejemplo de una automatización">
-                        {item.flujo.map((paso) => (
-                          <li>{paso}</li>
-                        ))}
-                      </ol>
-                    )
-                  }
                   <ul class="sv-tags" aria-label="Ejemplos">
                     {item.ejemplos.map((ejemplo) => (
                       <li>{ejemplo}</li>

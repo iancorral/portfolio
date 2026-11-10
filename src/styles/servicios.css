@@ -473,49 +473,6 @@ h2,
   font-weight: 620;
   line-height: 1.2;
 }
-.sv-card--feature {
-  --tab-color: #1e2124;
-  background: #084dc2;
-  color: #ffffff;
-}
-.sv-card--feature::after {
-  border-top-color: #1e2124;
-}
-.sv-card--feature .sv-card__icon {
-  color: #ffffff;
-}
-.sv-card--feature .sv-tags li {
-  background: #ffffff26;
-  color: #ffffff;
-}
-.sv-flow {
-  display: grid;
-  gap: 0.4rem;
-  counter-reset: flow;
-}
-.sv-flow li {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.75rem;
-  background: #ffffff1f;
-  border-radius: 0.3rem;
-  font-weight: 650;
-  line-height: 1.25;
-}
-.sv-flow li::before {
-  counter-increment: flow;
-  content: counter(flow);
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #084dc2;
-  font-weight: 800;
-}
 .sv-que__close {
   margin-top: clamp(1.6rem, 3vw, 2.4rem);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
@@ -857,6 +814,31 @@ h2,
   }
 }
 
+/* Phones: nine services stacked, so each card is kept short. */
+@media (max-width: 719px) {
+  .sv-cards {
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sv-card {
+    gap: 0.5rem;
+    padding: 1rem 1rem 1.05rem;
+  }
+  .sv-card__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .sv-card h3 {
+    font-size: 1.4rem;
+  }
+  .sv-card__line {
+    font-size: 1rem;
+  }
+  .sv-tags li {
+    padding: 0.26rem 0.5rem;
+    font-size: max(12px, 0.84rem);
+  }
+}
 @media (min-width: 720px) {
   .sv-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -864,12 +846,8 @@ h2,
   .sv-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .sv-card--feature,
   .sv-card:last-child {
     grid-column: 1 / -1;
-  }
-  .sv-flow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 960px) {
@@ -906,31 +884,7 @@ h2,
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .sv-card:last-child {
-    grid-column: span 2;
-  }
-  .sv-card--feature {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
-    grid-template-areas:
-      'top flow'
-      'line flow'
-      'tags flow';
-    gap: 0.75rem 2.4rem;
-    align-items: start;
-  }
-  .sv-card--feature .sv-card__top { grid-area: top; }
-  .sv-card--feature .sv-card__line { grid-area: line; }
-  .sv-card--feature .sv-tags { grid-area: tags; }
-  .sv-card--feature .sv-flow {
-    grid-area: flow;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    align-self: center;
-  }
-  .sv-card--feature .sv-flow li {
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-    padding: 0.8rem;
+    grid-column: auto;
   }
   .sv-work {
     grid-template-columns: repeat(3, minmax(0, 1fr));
