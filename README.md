@@ -18,6 +18,23 @@ npm run build    # type-checks, then writes the site to dist/
 npm run preview  # serves dist/ (use this to test the CSP; it doesn't run in dev)
 ```
 
+## Tests
+
+Browser tests check both pages in Chromium and WebKit (Safari's engine):
+- content, links and accessibility (axe)
+- the one-screen fit on 14 monitor sizes
+- the Content Security Policy
+- the services page navigation
+- 9 phones and tablets
+
+```sh
+npm run test:setup              # once per machine: downloads the test browsers
+npm test                        # builds, then runs every suite against dist/
+node tests/run.mjs csp devices  # only some suites, against the current dist/
+```
+
+Only failures and a summary per suite are printed. Full logs and screenshots go to `tests/.output/`.
+
 ## Where things live
 
 | To change | Edit |
