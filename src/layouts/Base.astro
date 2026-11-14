@@ -6,7 +6,8 @@ import { folders, person } from '../data/site';
 
 const title = `${person.name} | ${person.role}`;
 const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+// Pages are built as files (index.html), but their address has no file name.
+const canonical = Astro.site ? new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), Astro.site).href : undefined;
 const folderIds = folders.map((folder) => folder.id);
 
 const jsonLd = {

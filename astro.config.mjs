@@ -1,13 +1,16 @@
 import { defineConfig } from 'astro/config';
 import inlineScriptHashes from './integrations/inline-script-hashes.mjs';
 
-// SITE_URL wins once there is a custom domain. Cloudflare Pages provides its own URL until then.
-const pagesUrl = process.env.CF_PAGES_URL && process.env.CF_PAGES_BRANCH === 'main' ? undefined : process.env.CF_PAGES_URL;
-const site = process.env.SITE_URL ?? pagesUrl;
+// The live address. SITE_URL replaces it once there is a custom domain,
+// and preview builds of other branches use the URL Cloudflare Pages gives them.
+const isPreview = Boolean(process.env.CF_PAGES_BRANCH) && process.env.CF_PAGES_BRANCH !== 'main';
+const site = process.env.SITE_URL ?? (isPreview ? process.env.CF_PAGES_URL : 'https://iancorral.pages.dev');
 
 export default defineConfig({
   site,
   output: 'static',
+  // servicios.html instead of servicios/index.html, so /servicios loads without a redirect to /servicios/.
+  build: { format: 'file' },
   devToolbar: { enabled: false },
   integrations: [inlineScriptHashes()],
   // No Markdown code blocks here, and Shiki's inline styles would conflict with the CSP.

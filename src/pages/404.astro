@@ -1,0 +1,101 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import LogoMark from '../components/LogoMark.astro';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Página no encontrada | Ian Corral</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main>
+      <div class="mark"><LogoMark /></div>
+      <p class="code">404</p>
+      <h1>Esta página no existe.</h1>
+      <p class="en" lang="en">This page doesn't exist.</p>
+      <nav aria-label="Páginas">
+        <a href="/">Portafolio <span lang="en">/ Portfolio</span></a>
+        <a href="/servicios">Servicios</a>
+      </nav>
+    </main>
+  </body>
+</html>
+
+<style>
+  html {
+    background: #084dc2;
+  }
+  body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    background: #084dc2;
+    color: #ffffff;
+    font-family: 'Archivo Variable', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 34rem;
+  }
+  .mark :global(svg) {
+    display: block;
+    width: auto;
+    height: 3.4rem;
+  }
+  .mark :global(.logo-mark__c),
+  .mark :global(.logo-mark__bar) {
+    fill: #ffffff;
+  }
+  .code {
+    margin: 2rem 0 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  h1 {
+    margin: 0.3rem 0 0;
+    font-size: clamp(2.4rem, 9vw, 4rem);
+    font-stretch: 84%;
+    font-weight: 680;
+    line-height: 1;
+  }
+  .en {
+    margin: 0.8rem 0 0;
+    font-size: 1.15rem;
+    opacity: 0.85;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: 3rem;
+    padding: 0.6rem 1.2rem;
+    background: #ffffff;
+    color: #084dc2;
+    border-radius: 0.35rem;
+    font-weight: 720;
+    text-decoration: none;
+  }
+  a span {
+    font-weight: 500;
+  }
+  a:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+  }
+</style>

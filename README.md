@@ -47,6 +47,6 @@ The site is hosted on Cloudflare Pages, which builds every push to `main`.
 | Build command | `npm run build` |
 | Output directory | `dist` |
 | Node version | read from `.node-version` |
-| `SITE_URL` (optional) | the final domain, for example `https://example.com`. It sets the canonical and social preview URLs. |
+| `SITE_URL` (optional) | only needed for a custom domain, for example `https://example.com`. Without it the site uses `https://iancorral.pages.dev` for canonical and social preview URLs. |
 
 To serve the services page on its own subdomain later, point it at the same project and redirect its root to `/servicios`.
