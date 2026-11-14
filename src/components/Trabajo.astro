@@ -1,0 +1,19 @@
+---
+import type { trabajos } from '../data/servicios';
+
+interface Props {
+  item: (typeof trabajos)[number];
+}
+
+const { item } = Astro.props;
+---
+
+<li data-reveal>
+  <p class="sv-kicker">{item.tipo}</p>
+  <h3>{item.titulo}</h3>
+  <p>{item.texto}</p>
+  <ul class="sv-ticks">
+    {item.puntos.map((punto) => <li>{punto}</li>)}
+  </ul>
+  {item.enlace && <a class="sv-link" href={item.enlace.href} target="_blank" rel="noopener noreferrer">{item.enlace.texto}</a>}
+</li>

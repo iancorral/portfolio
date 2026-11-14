@@ -70,8 +70,9 @@ function initNav() {
 
   const hero = document.querySelector<HTMLElement>('.sv-hero');
   const onScroll = () => {
-    // "Past" allows for the folder tab of the next section, which overlaps the hero's last few pixels.
-    const pastHero = hero ? hero.getBoundingClientRect().bottom <= top.offsetHeight + 64 : scrollY > 8;
+    // "Past" allows for the folder tab of the next section, which overlaps the hero's last few pixels,
+    // plus room for where a jump from the menu lands.
+    const pastHero = hero ? hero.getBoundingClientRect().bottom <= top.offsetHeight + 96 : scrollY > 8;
     top.classList.toggle('is-scrolled', pastHero);
   };
   addEventListener('scroll', onScroll, { passive: true });

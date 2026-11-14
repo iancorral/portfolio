@@ -7,6 +7,7 @@ import BrandMark from '../components/BrandMark.astro';
 import LineIcon from '../components/LineIcon.astro';
 import LogoFull from '../components/LogoFull.astro';
 import LogoMark from '../components/LogoMark.astro';
+import Trabajo from '../components/Trabajo.astro';
 import { contacto, hero, necesidades, pasos, preguntas, queHago, servicios, trabajos } from '../data/servicios';
 import { whatsappIcon } from '../lib/icons';
 
@@ -46,7 +47,6 @@ const contactoPrincipal = whatsappInicial || correoInicial;
     <header class="sv-top" data-top>
       <a class="sv-brand" href="#inicio" aria-label="IC Software, ir al inicio">
         <LogoFull class="sv-brand__full" />
-        <LogoMark class="sv-brand__logo" />
       </a>
       <nav class="sv-nav" aria-label="Secciones">
         <ul>
@@ -54,7 +54,6 @@ const contactoPrincipal = whatsappInicial || correoInicial;
           <li><a href="#trabajos" data-spy>Trabajos</a></li>
           <li><a href="#como" data-spy>Cómo trabajo</a></li>
           <li><a href="#preguntas" data-spy>Preguntas</a></li>
-          <li><a href="/">Portafolio</a></li>
         </ul>
       </nav>
       <a class="sv-top__cta" href="#cotizar" data-spy>Cotizar</a>
@@ -82,7 +81,7 @@ const contactoPrincipal = whatsappInicial || correoInicial;
         </div>
       </section>
 
-      <section class="sv-folder sv-white" style="--i:0" id="que-hago" aria-labelledby="sv-que">
+      <section class="sv-folder sv-sky" style="--i:0" id="que-hago" aria-labelledby="sv-que">
         <p class="sv-tab" aria-hidden="true">Qué hago</p>
         <div class="sv-body">
           <div class="sv-que__head" data-reveal>
@@ -115,29 +114,22 @@ const contactoPrincipal = whatsappInicial || correoInicial;
         <p class="sv-tab" aria-hidden="true">Trabajos</p>
         <div class="sv-body">
           <h2 id="sv-trabajos" data-reveal>Negocios reales, <em>funcionando.</em></h2>
-          <figure class="sv-shot" data-reveal>
-            <div class="sv-window">
-              <div class="sv-window__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-              <Image src={hero.imagen} widths={[640, 1120]} sizes="(max-width: 900px) 92vw, 900px" alt={hero.imagenAlt} />
-            </div>
-            <div class="sv-phone">
-              <Image src={hero.celular} widths={[180, 340]} sizes="170px" alt={hero.celularAlt} />
-            </div>
-          </figure>
+          <div class="sv-showcase">
+            <figure class="sv-shot" data-reveal>
+              <div class="sv-window">
+                <div class="sv-window__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <Image src={hero.imagen} widths={[640, 1120]} sizes="(max-width: 959px) 92vw, 60vw" alt={hero.imagenAlt} />
+              </div>
+              <div class="sv-phone">
+                <Image src={hero.celular} widths={[180, 340]} sizes="170px" alt={hero.celularAlt} />
+              </div>
+            </figure>
+            <ul class="sv-work sv-work--lead">
+              {trabajos.slice(0, 1).map((item) => <Trabajo item={item} />)}
+            </ul>
+          </div>
           <ul class="sv-work">
-            {
-              trabajos.map((item) => (
-                <li data-reveal>
-                  <p class="sv-kicker">{item.tipo}</p>
-                  <h3>{item.titulo}</h3>
-                  <p>{item.texto}</p>
-                  <ul class="sv-ticks">
-                    {item.puntos.map((punto) => <li>{punto}</li>)}
-                  </ul>
-                  {item.enlace && <a class="sv-link" href={item.enlace.href} target="_blank" rel="noopener noreferrer">{item.enlace.texto}</a>}
-                </li>
-              ))
-            }
+            {trabajos.slice(1).map((item) => <Trabajo item={item} />)}
           </ul>
         </div>
       </section>
@@ -159,15 +151,21 @@ const contactoPrincipal = whatsappInicial || correoInicial;
         </div>
       </section>
 
-      <section class="sv-folder sv-white" style="--i:3" id="preguntas" aria-labelledby="sv-preguntas">
+      <section class="sv-folder sv-sky" style="--i:3" id="preguntas" aria-labelledby="sv-preguntas">
         <p class="sv-tab" aria-hidden="true">Preguntas</p>
         <div class="sv-body sv-split">
-          <h2 id="sv-preguntas" data-reveal>Antes de <em>escribirme.</em></h2>
+          <div data-reveal>
+            <h2 id="sv-preguntas">Antes de <em>escribirme.</em></h2>
+            <p class="sv-faq__hint">Elige una pregunta para ver su respuesta.</p>
+          </div>
           <div class="sv-faq">
             {
-              preguntas.map((item) => (
-                <details data-reveal>
-                  <summary>{item.pregunta}</summary>
+              preguntas.map((item, i) => (
+                <details open={i === 0} data-reveal>
+                  <summary>
+                    <span>{item.pregunta}</span>
+                    <span class="sv-faq__icon" aria-hidden="true"></span>
+                  </summary>
                   <p>{item.respuesta}</p>
                 </details>
               ))
@@ -228,10 +226,14 @@ const contactoPrincipal = whatsappInicial || correoInicial;
     </main>
 
     <footer class="sv-foot">
-      <img src="/logo-full.svg" alt="IC Software" width="1480" height="364" loading="lazy" />
-      <div>
-        <p>Chihuahua, México · © {new Date().getFullYear()} Ian Corral</p>
-        <a href="/">Ver portafolio</a>
+      <p class="sv-foot__brand"><LogoFull class="sv-foot__logo" /><span class="sr-only">IC Software</span></p>
+      <div class="sv-foot__info">
+        <p>Páginas y sistemas a la medida<br />Chihuahua, México</p>
+        <ul class="sv-foot__links">
+          {whatsappInicial && <li><a href={whatsappInicial} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>}
+          <li><a href={correoInicial}>{contacto.correo}</a></li>
+        </ul>
+        <p class="sv-foot__legal">© {new Date().getFullYear()} Ian Corral</p>
       </div>
     </footer>
 
